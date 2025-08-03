@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Key Metrics</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <header class="dashboard-header">
+        <h1>Key Metrics</h1>
+        <div class="last-updated">
+          Last updated: <span id="lastUpdated">Never</span>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <div class="metrics-grid">
+          <div class="metric-card" id="metric1">
+            <div class="metric-title">Active Users</div>
+            <div class="metric-value" id="totalUsers">--</div>
+            <div class="metric-change" id="usersChange">--</div>
+          </div>
+
+          <div class="metric-card" id="metric2">
+            <div class="metric-title">Monthly Recurring Revenue</div>
+            <div class="metric-value" id="revenue">--</div>
+            <div class="metric-change" id="revenueChange">--</div>
+          </div>
+
+          <div class="metric-card" id="metric3">
+            <div class="metric-title">Active Subscriptions</div>
+            <div class="metric-value" id="activeSessions">--</div>
+            <div class="metric-change" id="sessionsChange">--</div>
+          </div>
+
+          <div class="metric-card" id="metric4">
+            <div class="metric-title">Active Trials</div>
+            <div class="metric-value" id="conversionRate">--</div>
+            <div class="metric-change" id="conversionChange">--</div>
+          </div>
+
+          <div class="metric-card" id="metric5">
+            <div class="metric-title">New Customers (Past Month)</div>
+            <div class="metric-value" id="newCustomers">--</div>
+            <div class="metric-change" id="newCustomersChange">Past Month</div>
+          </div>
+
+          <div class="metric-card" id="metric6">
+            <div class="metric-title">Revenue (Past Month)</div>
+            <div class="metric-value" id="monthlyRevenue">--</div>
+            <div class="metric-change" id="monthlyRevenueChange">
+              Past Month
+            </div>
+          </div>
+
+          <div class="metric-card wide" id="metric7">
+            <div class="metric-title">Business Overview</div>
+            <div class="metric-chart" id="performanceChart">
+              <div class="chart-placeholder">Metrics visualization</div>
+            </div>
+          </div>
+
+          <div class="metric-card wide" id="metric8">
+            <div class="metric-title">Key Insights</div>
+            <div class="activity-list" id="activityList">
+              <div class="activity-placeholder">Loading insights...</div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading metrics...</div>
+      </div>
+
+      <div class="error-message" id="errorMessage" style="display: none">
+        <div class="error-text">
+          Failed to load metrics. Please check your API configuration.
+        </div>
+        <button id="retryButton">Retry</button>
+      </div>
+
+      <div class="settings-button" id="settingsButton">⚙️</div>
+
+      <div class="settings-modal" id="settingsModal" style="display: none">
+        <div class="settings-content">
+          <h3>API Configuration</h3>
+          <label for="apiUrl">API URL:</label>
+          <input
+            type="url"
+            id="apiUrl"
+            placeholder="https://api.example.com/metrics"
+          />
+
+          <label for="apiKey">API Key (optional):</label>
+          <input type="text" id="apiKey" placeholder="Your API key" />
+
+          <label for="refreshInterval">Refresh Interval (minutes):</label>
+          <input
+            type="number"
+            id="refreshInterval"
+            min="1"
+            max="60"
+            value="5"
+          />
+
+          <div class="settings-buttons">
+            <button id="saveSettings">Save</button>
+            <button id="cancelSettings">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>
