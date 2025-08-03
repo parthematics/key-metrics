@@ -1,6 +1,6 @@
-# Candle Metrics Chrome Extension
+# key metrics
 
-A Chrome extension that replaces your new tab page with a custom dashboard displaying key metrics from the Candle API.
+A Chrome extension that replaces your new tab page with a custom dashboard displaying key revenue & user metrics from the your API.
 
 ## Features
 
@@ -13,9 +13,11 @@ A Chrome extension that replaces your new tab page with a custom dashboard displ
 ## Installation
 
 1. **Download the Extension Files**
+
    - Save all files (`manifest.json`, `newtab.html`, `styles.css`, `dashboard.js`) to a folder on your computer
 
 2. **Load Extension in Chrome**
+
    - Open Chrome and go to `chrome://extensions/`
    - Enable "Developer mode" (toggle in top right)
    - Click "Load unpacked" and select your extension folder
@@ -23,11 +25,11 @@ A Chrome extension that replaces your new tab page with a custom dashboard displ
 
 3. **Test the Extension**
    - Open a new tab in Chrome
-   - You should see your Candle metrics dashboard
+   - You should see your key metrics dashboard
 
 ## Dashboard Metrics
 
-The dashboard displays the following metrics from your Candle API:
+The dashboard displays the following metrics from your key API:
 
 - **Active Users**: Total number of active users on the platform
 - **Monthly Recurring Revenue (MRR)**: Current monthly recurring revenue in USD
@@ -38,7 +40,7 @@ The dashboard displays the following metrics from your Candle API:
 
 ## Configuration
 
-The extension is pre-configured with your Candle API endpoint. If you need to modify settings:
+The extension is pre-configured with your API endpoint. If you need to modify settings:
 
 1. Click the settings gear icon (⚙️) in the bottom right of the dashboard
 2. Update API URL, API key, or refresh interval as needed
@@ -60,7 +62,7 @@ You can customize the dashboard by editing the files:
 
 ## API Data Format
 
-The extension expects data in this format from the Candle API:
+The extension expects data in this format from your API endpoint:
 
 ```json
 {
