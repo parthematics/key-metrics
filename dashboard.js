@@ -5,6 +5,9 @@ class MetricsDashboard {
     this.refreshInterval = 5;
     this.refreshTimer = null;
     this.mrrHistoryKey = "mrrHistory";
+    this.lastFetchKey = "lastFetchTime";
+    this.cachedDataKey = "cachedMetricsData";
+    this.refreshThrottle = 10000;
 
     this.init();
   }
@@ -126,6 +129,28 @@ class MetricsDashboard {
       return;
     }
 
+    const now = Date.now();
+    const lastFetchTime = localStorage.getItem(this.lastFetchKey);
+    const timeSinceLastFetch =
+      now - (lastFetchTime ? parseInt(lastFetchTime) : 0);
+
+    if (lastFetchTime && timeSinceLastFetch < this.refreshThrottle) {
+      const cachedData = localStorage.getItem(this.cachedDataKey);
+      if (cachedData) {
+        try {
+          const data = JSON.parse(cachedData);
+          this.updateDashboard(data);
+          this.updateLastUpdated(parseInt(lastFetchTime));
+          this.showCacheIndicator();
+          this.hideLoading();
+          this.hideError();
+          return;
+        } catch (error) {
+          console.error("Error parsing cached data:", error);
+        }
+      }
+    }
+
     this.showLoading();
     this.hideError();
 
@@ -148,8 +173,13 @@ class MetricsDashboard {
       }
 
       const data = await response.json();
+
+      localStorage.setItem(this.cachedDataKey, JSON.stringify(data));
+      localStorage.setItem(this.lastFetchKey, now.toString());
+
       this.updateDashboard(data);
       this.updateLastUpdated();
+      this.hideCacheIndicator();
       this.hideLoading();
     } catch (error) {
       console.error("Error fetching metrics:", error);
@@ -166,7 +196,10 @@ class MetricsDashboard {
     this.updateMetric("newCustomers", data.new_customers || 0);
     this.updateMetric("monthlyRevenue", data.revenue || 0, "$");
     this.updateMetric("usersCreatedToday", data.users_created_today || 0);
-    this.updateMetric("usersCreatedLastHour", data.users_created_in_last_hour || 0);
+    this.updateMetric(
+      "usersCreatedLastHour",
+      data.users_created_in_last_hour || 0
+    );
 
     this.storeMRRData(data.mrr || 0);
 
@@ -193,9 +226,7 @@ class MetricsDashboard {
         timestamp: new Date(),
       },
       {
-        description: `${
-          data.users_created_today || 0
-        } new users created today`,
+        description: `${data.users_created_today || 0} new users created today`,
         timestamp: new Date(),
       },
       {
@@ -444,10 +475,27 @@ class MetricsDashboard {
     return date.toLocaleDateString();
   }
 
-  updateLastUpdated() {
+  updateLastUpdated(timestamp = null) {
     const lastUpdated = document.getElementById("lastUpdated");
     if (lastUpdated) {
-      lastUpdated.textContent = new Date().toLocaleTimeString();
+      const updateTime = timestamp ? new Date(timestamp) : new Date();
+      lastUpdated.textContent = updateTime.toLocaleTimeString();
+    }
+  }
+
+  showCacheIndicator() {
+    const indicator = document.getElementById("cacheIndicator");
+    if (indicator) {
+      indicator.style.display = "inline";
+    } else {
+      console.error("Cache indicator element not found!");
+    }
+  }
+
+  hideCacheIndicator() {
+    const indicator = document.getElementById("cacheIndicator");
+    if (indicator) {
+      indicator.style.display = "none";
     }
   }
 
