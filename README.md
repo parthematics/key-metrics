@@ -4,10 +4,12 @@ A Chrome extension that replaces your new tab page with a custom dashboard displ
 
 ## Features
 
-- **Real-time Metrics**: Displays active users, MRR, subscriptions, trials, and revenue data
+- **Real-time Metrics**: Displays active users, MRR, subscriptions, trials, revenue, and user creation data
+- **MRR Tracking**: Visual ASCII chart showing MRR trends over time
 - **Auto-refresh**: Updates metrics every 5 minutes automatically
-- **Clean Design**: Modern, responsive dashboard with glass-morphism design
+- **Dark Terminal Theme**: Clean, terminal-inspired design with monospace fonts
 - **Key Insights**: Shows business insights and metric summaries
+- **Responsive Layout**: Scales to any screen width
 - **Error Handling**: Graceful error handling with retry functionality
 
 ## Installation
@@ -29,7 +31,7 @@ A Chrome extension that replaces your new tab page with a custom dashboard displ
 
 ## Dashboard Metrics
 
-The dashboard displays the following metrics from your key API:
+The dashboard displays the following metrics from your API:
 
 - **Active Users**: Total number of active users on the platform
 - **Monthly Recurring Revenue (MRR)**: Current monthly recurring revenue in USD
@@ -37,6 +39,10 @@ The dashboard displays the following metrics from your key API:
 - **Active Trials**: Number of current trial users
 - **New Customers**: Number of new customers acquired in the past month
 - **Revenue (Past Month)**: Total revenue generated in the past month
+- **Users Created Today**: Number of new users registered today
+- **Users Created (Last Hour)**: Number of users who signed up in the last hour
+- **Business Overview**: Visual MRR trend chart showing hourly changes
+- **Key Insights**: Real-time business insights and growth indicators
 
 ## Configuration
 
@@ -71,6 +77,15 @@ The extension expects data in this format from your API endpoint:
   "mrr": 12450,
   "revenue": 15680,
   "new_customers": 28,
-  "active_users": 1250
+  "active_users": 1250,
+  "users_created_today": 1815,
+  "users_created_in_last_hour": 112
 }
 ```
+
+### New Fields
+
+- `users_created_today`: Integer representing the number of users who signed up today
+- `users_created_in_last_hour`: Integer representing the number of users who registered in the last hour
+
+These new metrics help track user acquisition velocity and real-time growth patterns.

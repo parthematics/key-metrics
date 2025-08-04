@@ -88,7 +88,7 @@ body {
 
 @media (min-width: 1200px) {
   .metrics-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .metric-card {
@@ -96,7 +96,7 @@ body {
   }
 
   .metric-card.wide {
-    grid-column: span 1;
+    grid-column: span 2;
   }
 }
 

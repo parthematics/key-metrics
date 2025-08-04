@@ -165,6 +165,8 @@ class MetricsDashboard {
     this.updateMetric("conversionRate", data.active_trials || 0);
     this.updateMetric("newCustomers", data.new_customers || 0);
     this.updateMetric("monthlyRevenue", data.revenue || 0, "$");
+    this.updateMetric("usersCreatedToday", data.users_created_today || 0);
+    this.updateMetric("usersCreatedLastHour", data.users_created_in_last_hour || 0);
 
     this.storeMRRData(data.mrr || 0);
 
@@ -174,6 +176,8 @@ class MetricsDashboard {
     this.updateMetricDisplay("conversionChange", "Current Trials");
     this.updateMetricDisplay("newCustomersChange", "Past Month");
     this.updateMetricDisplay("monthlyRevenueChange", "Past Month");
+    this.updateMetricDisplay("usersCreatedTodayChange", "Today");
+    this.updateMetricDisplay("usersCreatedLastHourChange", "Last Hour");
 
     const insights = [
       {
@@ -190,18 +194,20 @@ class MetricsDashboard {
       },
       {
         description: `${
-          data.active_subscriptions || 0
-        } active subscriptions generating revenue`,
-        timestamp: new Date(),
-      },
-      {
-        description: `${data.active_trials || 0} trials currently in progress`,
+          data.users_created_today || 0
+        } new users created today`,
         timestamp: new Date(),
       },
       {
         description: `${
-          data.new_customers || 0
-        } new customers acquired this month`,
+          data.users_created_in_last_hour || 0
+        } users registered in the last hour`,
+        timestamp: new Date(),
+      },
+      {
+        description: `${
+          data.active_subscriptions || 0
+        } active subscriptions generating revenue`,
         timestamp: new Date(),
       },
     ];
